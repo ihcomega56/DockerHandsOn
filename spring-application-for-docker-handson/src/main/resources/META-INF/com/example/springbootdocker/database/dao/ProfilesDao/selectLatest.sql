@@ -1,0 +1,1 @@
+select * from profiles order by id desc limit 1;
