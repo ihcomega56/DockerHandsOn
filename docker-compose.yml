@@ -13,5 +13,5 @@ services:
     ports:
       - "8888:8080"
     volumes:
-      - "./spring-application-for-docker-handson/build/libs:/work"
-    entrypoint: "java -jar /work/spring-application-for-docker-handson-0.0.1.jar"
+      - "./app4handson/build/libs:/work"
+    entrypoint: "java -jar /work/app4handson-0.0.1.jar"

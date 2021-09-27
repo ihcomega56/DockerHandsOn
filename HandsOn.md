@@ -54,7 +54,7 @@ https://github.com/ihcomega56/DockerHandsOn/blob/main/HandsOn.md
 - サンプルアプリ用Dockerfileを編集する(Springのアプリケーション)
 
 - ビルドする
-`cd spring-application-for-docker-handson`
+`cd app4handson`
 `docker build -t sample-application:0.0.1 .`
 
 - ネットワークを作る
