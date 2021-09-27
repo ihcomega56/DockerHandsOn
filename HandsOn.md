@@ -54,11 +54,15 @@ https://github.com/ihcomega56/DockerHandsOn/blob/main/HandsOn.md
 - サンプルアプリ用Dockerfileを編集する(Springのアプリケーション)
 
 - ビルドする
-`cd app4handson`
+`cd spring-application-for-docker-handson`
 `docker build -t sample-application:0.0.1 .`
 
 - ネットワークを作る
 `docker network create my-network`
+
+- MySQLのコンテナも同じネットワーク内で再度立ち上げる  
+`docker rm -f my-mysql`  
+`docker run -p 3333:3306 -d --network my-network --name my-mysql my-mysql-image:1.0`
 
 - バックグラウンドで実行する  
 `docker run -p 8888:8080 -d --network my-network --name sample-application-container sample-application:0.0.1`
@@ -116,6 +120,10 @@ http://localhost:8888
 `docker-compose up -d`
 
 - Dockerfileで設定した内容を上書きする
+
+- アプリをちょっと書き換えてJARを作り直しコンテナを再起動する
+`./gradlew bootRun`
+`docker-compose restart`
 
 - 停止する  
 `docker-compose down`
