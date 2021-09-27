@@ -1,6 +1,6 @@
 FROM openjdk:11
-RUN mkdir work
-RUN groupadd -r spring && useradd -r -gspring spring
-USER spring:spring
-COPY build/libs/*.jar work/app.jar
-ENTRYPOINT ["java","-jar","/work/app.jar"]
+# 作業ディレクトリworkを作る
+# 作業実行用ユーザーを作る
+# 作業実行用ユーザーを指定する
+# 実行ファイル(JAR)をコンテナ内の作業ディレクトリにコピーする
+# 実行する
