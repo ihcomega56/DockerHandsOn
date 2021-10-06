@@ -1,4 +1,5 @@
-Dockerよちよち歩きハンズオン
+Dockerよちよち歩きハンズオン  
+[参考スライド](https://speakerdeck.com/ihcomega56/docker-hands-on-for-beginners)
 
 ## 概要
 
