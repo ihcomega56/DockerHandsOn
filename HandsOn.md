@@ -8,10 +8,8 @@
 `docker create --name first-container hello-world:latest`
 - コンテナ一覧を確認する  
 `docker ps -a`  
-- コンテナをフォアグラウンドで起動する  
+- コンテナをフォアグラウンドで起動する (`-a`をつけないとバックグラウンド実行)  
 `docker start -a first-container`　　
-
-    - `-a`をつけないとバックグラウンドで実行される
 - コンテナ一覧を確認する  
 `docker ps -a`  
 
@@ -35,6 +33,7 @@
 
 - サンプルプロジェクトを取得する  
 https://github.com/ihcomega56/DockerHandsOn/blob/main/HandsOn.md　　
+    - フォークする 
     - 簡単にプロジェクト構成を説明する　　
 
 - Dockerfileを作成する(MySQL)
@@ -122,7 +121,7 @@ http://localhost:8888
 - ローカル・リモート・バーチャルリポジトリを作成する
 
 - イメージにタグを打つ
-`docker tag my-mysql-image:1.0 ihcomegag.jfrog.io/handson-docker/my-mysql-image:1.0`  
+  (`docker tag my-mysql-image:1.0 ihcomegag.jfrog.io/handson-docker/my-mysql-image:1.0`)  
 `docker tag sample-application:0.0.1 ihcomegag.jfrog.io/handson-docker/sample-application:0.0.1`  
     - 最初からこの名前でビルドしてもよい  
 `docker images`
@@ -131,7 +130,7 @@ http://localhost:8888
 `docker login ihcomegag.jfrog.io`
 
 - バーチャルリポジトリに対しpushを行う  
-`docker push ihcomegag.jfrog.io/handson-docker/my-mysql-image:1.0`
+  (`docker push ihcomegag.jfrog.io/handson-docker/my-mysql-image:1.0`)  
 `docker push ihcomegag.jfrog.io/handson-docker/sample-application:0.0.1`
 
 - バーチャルリポジトリ越しにpullを行う  
