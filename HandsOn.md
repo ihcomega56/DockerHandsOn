@@ -116,7 +116,7 @@ ENTRYPOINT ["java","-jar","/work/app.jar"]
 
 - ローカル・リモート・バーチャルリポジトリを作成する
 
-- イメージにタグを打つ
+- イメージにタグを打つ  
   (`docker tag my-mysql-image:1.0 ihcomegag.jfrog.io/handson-docker/my-mysql-image:1.0`)  
 `docker tag sample-application:0.0.1 ihcomegag.jfrog.io/handson-docker/sample-application:0.0.1`  
     - 最初からこの名前でビルドしてもよい  
