@@ -43,14 +43,15 @@ FROM mysql:8.0
 ENV MYSQL_ROOT_PASSWORD=password
 
 COPY my.cnf /etc/mysql/conf.d/my.cnf
-COPY create-profiles.sql /docker-entrypoint-initdb.d/create-profiles.sql
+COPY create-messages.sql /docker-entrypoint-initdb.d/create-messages.sql
 ```
 
 - ビルドする  
 `docker build -t my-mysql-image:1.0 .`  
     - `-t` はイメージの名前・タグを指定する
     - タグは指定しなければ `latest` となる(付与する場合も使う場合も)
-`docker images`  
+    
+    `docker images`  
 
 - バックグラウンドで実行する  
 `docker run -p 3333:3306 -d --name my-mysql my-mysql-image:1.0`
@@ -66,6 +67,10 @@ COPY create-profiles.sql /docker-entrypoint-initdb.d/create-profiles.sql
 (パスワード入力を求められるので`password`と入力する ※先ほどDockerfileの`ENV`で設定したもの)  
 `docker exec -it my-mysql /bin/bash` とかもできる  
 
+- アーティファクトを作る  
+`cd spring-application-for-docker-handson`  
+`./gradlew bootJar`  
+
 - サンプルアプリ用Dockerfileを編集する(Springのアプリケーション)  
 `spring-application-for-docker-handson`ディレクトリ内にファイルは既ににあるので以下の通り追記する　　
 
@@ -78,34 +83,25 @@ COPY build/libs/*.jar work/app.jar
 ENTRYPOINT ["java","-jar","/work/app.jar"]
 ```
 
-- アーティファクトを作る  
-`cd spring-application-for-docker-handson`  
-`./gradlew bootJar`  
-
 - ビルドする
 `docker build -t sample-application:0.0.1 .`
 
 - ネットワークを作る
 `docker network create my-network`
 
+- バックグラウンドで実行する  
+`docker run -p 8888:8080 -d --network my-network --name sample-application-container sample-application:0.0.1`  
+`docker logs -f sample-application-container`
+
+- ブラウザでアクセスする
+  http://localhost:8888
+
 - MySQLのコンテナも同じネットワーク内で再度立ち上げる  
 `docker rm -f my-mysql`  
 `docker run -p 3333:3306 -d --network my-network --name my-mysql my-mysql-image:1.0`
 
-- バックグラウンドで実行する  
-`docker run -p 8888:8080 -d --network my-network --name sample-application-container sample-application:0.0.1`
-`docker logs -f sample-application-container`
-
 - ブラウザでアクセスする
-http://localhost:8888
-
-- MySQLにデータを1件入れてみる
-`docker exec -it my-mysql mysql -p`
-`use test;`
-`insert into profiles(name) values('Yokona');`
-
-- ブラウザでアクセスする
-http://localhost:8888
+  http://localhost:8888
 
 - 起動中のコンテナ一覧を見る  
 `docker ps`  
